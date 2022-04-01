@@ -1,0 +1,27 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Wall : MonoBehaviour
+{
+    public Sprite damageSprite;
+    public int hp = 4;
+
+    public AudioClip chopSfx1;
+    public AudioClip chopSfx2;
+
+    private SpriteRenderer spriteRenderer;
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void DamageWall(int loss)
+    {
+        SoundManager.instance.RandomizeSfx(chopSfx1, chopSfx2);
+        spriteRenderer.sprite = damageSprite;
+        hp -= loss;
+        if (hp <= 0)
+            gameObject.SetActive(false);
+    }
+}
